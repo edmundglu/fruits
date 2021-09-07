@@ -3,7 +3,6 @@ const express = require('express');
 const app = express();
 
 app.use(express.static('dist'));
-//start in dist folder when you boot up the server
 
 app.get('/fruitList', (req, res) => {
   axios
