@@ -55,11 +55,34 @@ class App extends React.Component {
         currentFruitClickedOn = element;
         console.log(currentFruitClickedOn);
         document.getElementById('name').innerHTML = currentFruitClickedOn.name;
-        document.getElementById('modal').innerHTML = JSON.stringify(
-          currentFruitClickedOn,
-          null,
-          4
-        );
+        document.getElementById('modalId').innerHTML =
+          '<b>ID: </b>' + currentFruitClickedOn.id;
+        document.getElementById('modalGenus').innerHTML =
+          '<b>Genus: </b>' + currentFruitClickedOn.genus;
+        document.getElementById('modalFamily').innerHTML =
+          '<b>Family: </b>' + currentFruitClickedOn.family;
+        document.getElementById('modalOrder').innerHTML =
+          '<b>Order: </b>' + currentFruitClickedOn.order;
+        document.getElementById('modalNutritions').innerHTML = `
+          <b>Calories: </b>
+          ${currentFruitClickedOn.nutritions.calories}          
+          <hr>
+          <b>Carbohydrates: </b>
+          ${currentFruitClickedOn.nutritions.carbohydrates} 
+          <hr>
+          <b>Fat: </b>
+           
+          ${currentFruitClickedOn.nutritions.fat} 
+          <hr>
+          <b>Protein: </b>
+           
+          ${currentFruitClickedOn.nutritions.protein} 
+          <hr>
+          <b>Sugar: </b>
+           
+          ${currentFruitClickedOn.nutritions.sugar} 
+          `;
+
         console.log(document.getElementById('modal').innerHTML);
       }
     });
@@ -79,6 +102,11 @@ class App extends React.Component {
               <div className='fruitName'>{element.name}</div>
               <img
                 src={`https://passport-media.s3-us-west-1.amazonaws.com/images/eng-intern-interview/${element.name.toLowerCase()}.png`}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src =
+                    'https://cdn.pixabay.com/photo/2021/09/07/04/32/04-32-21-616_1280.png';
+                }}
                 id={element.name}
                 onClick={this.handleOnClick}
                 className='grid-item'
@@ -95,7 +123,19 @@ class App extends React.Component {
             <h2 id='name'></h2>
           </div>
           <div className='modal-body'>
-            <pre id='modal'></pre>
+            <h2>Nutrition Facts</h2>
+            <hr
+              style={{ height: 5, backgroundColor: 'black', color: 'black' }}
+            ></hr>
+            <p id='modalNutritions'></p>
+            <hr
+              style={{ height: 8, backgroundColor: 'black', color: 'black' }}
+            ></hr>
+            <p id='modalId'></p>
+
+            <p id='modalGenus'></p>
+            <p id='modalFamily'></p>
+            <p id='modalOrder'></p>
           </div>
           <div className='modal-footer'></div>
         </div>
